@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using pt.ncaro.util.dependencyinjection.attributes;
@@ -7,12 +8,18 @@ namespace pt.ncaro.util.dependencyinjection.builder
 {
     public class ServiceCollectionBuilder
     {
+        private delegate IList<DiscoveredService> ScanFunc(Assembly assembly);
+
         private readonly IAttributeScanner _scanner;
+
         private readonly ICollection<DiscoveredService> _services = new List<DiscoveredService>();
+
+        private ScanFunc _scanFunc;
 
         internal ServiceCollectionBuilder(IAttributeScanner scanner)
         {
             _scanner = scanner;
+            _scanFunc = _scanner.scan;
         }
 
         public IServiceCollection Build()
@@ -33,17 +40,23 @@ namespace pt.ncaro.util.dependencyinjection.builder
 
         public ServiceCollectionBuilder AddCurrentAssembly()
         {
-            return addAssembly(Assembly.GetCallingAssembly());
+            return ScanAssembly(Assembly.GetCallingAssembly());
         }
 
         public ServiceCollectionBuilder AddAssembly(Assembly assembly)
         {
-            return addAssembly(assembly);
+            return ScanAssembly(assembly);
         }
 
-        private ServiceCollectionBuilder addAssembly(Assembly assembly)
+        public ServiceCollectionBuilder Component(string component)
         {
-            foreach (var discoveredService in _scanner.scan(assembly))
+            _scanFunc = assembly => _scanner.scan(assembly, component);
+            return this;
+        }
+
+        private ServiceCollectionBuilder ScanAssembly(Assembly assembly)
+        {
+            foreach (var discoveredService in _scanFunc(assembly))
             {
                 _services.Add(discoveredService);
             }
@@ -55,7 +68,7 @@ namespace pt.ncaro.util.dependencyinjection.builder
         {
             var assembly = Assembly.GetCallingAssembly();
             return new ServiceCollectionBuilder(new AttributeScanner())
-                .addAssembly(assembly)
+                .ScanAssembly(assembly)
                 .Build();
         }
     }

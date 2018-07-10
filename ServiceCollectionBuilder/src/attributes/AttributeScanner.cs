@@ -8,11 +8,25 @@ namespace pt.ncaro.util.dependencyinjection.attributes
     public interface IAttributeScanner
     {
         IList<DiscoveredService> scan(Assembly assembly);
+        IList<DiscoveredService> scan(Assembly assembly, string component, bool includeRootComponent = false);
     }
 
     public class AttributeScanner : IAttributeScanner
     {
         public IList<DiscoveredService> scan(Assembly assembly)
+        {
+            return all(assembly).ToList();
+        }
+
+        public IList<DiscoveredService> scan(Assembly assembly, string component, bool includeRootComponent = false)
+        {
+            return all(assembly)
+                .Where(it => includeRootComponent && it.Configuration.Component == ServiceImplementationAttribute.RootComponent || it.Configuration.Component == component)
+                .ToList();
+        }
+
+
+        private IEnumerable<DiscoveredService> all(Assembly assembly)
         {
             return
                 (from t in assembly.DefinedTypes
@@ -21,8 +35,7 @@ namespace pt.ncaro.util.dependencyinjection.attributes
                 .SelectMany(it =>
                     from attr in it.attrs
                     select new DiscoveredService(it.type, attr)
-                )
-                .ToList();
+                );
         }
     }
 
