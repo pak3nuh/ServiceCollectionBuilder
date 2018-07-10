@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using pt.ncaro.util.dependencyinjection.attributes;
+using pt.ncaro.util.dependencyinjection.mock;
 using Xunit;
 
-namespace ServiceCollectionBuilderTests.attributes
+namespace pt.ncaro.util.dependencyinjection.attributes
 {
     public class ScannerTests
     {

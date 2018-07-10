@@ -1,6 +1,6 @@
 ﻿using pt.ncaro.util.dependencyinjection.attributes;
 
-namespace ServiceCollectionBuilderTests.attributes
+namespace pt.ncaro.util.dependencyinjection.mock
 {
     [ServiceImplementation(typeof(IHiFiveService))]
     [ServiceImplementation(typeof(ISayHelloService))]
