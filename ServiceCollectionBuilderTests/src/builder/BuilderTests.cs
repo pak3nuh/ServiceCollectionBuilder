@@ -32,13 +32,16 @@ namespace pt.ncaro.util.dependencyinjection.builder
         [Fact]
         public void scopedDependencies()
         {
-            Assert.True(false);
+            Assert.Same(spi.GetService<IPongService>(),spi.GetService<IPongService>());
+            var scope1 = spi.CreateScope();
+            Assert.NotSame(scope1.ServiceProvider.GetService<IPongService>(),spi.GetService<IPongService>());
+            Assert.Same(scope1.ServiceProvider.GetService<IPongService>(),scope1.ServiceProvider.GetService<IPongService>());
         }
 
         [Fact]
         public void transientDependencies()
         {
-            Assert.True(false);
+            Assert.NotSame(spi.GetService<IPingService>(),spi.GetService<IPingService>());
         }
         
     }
