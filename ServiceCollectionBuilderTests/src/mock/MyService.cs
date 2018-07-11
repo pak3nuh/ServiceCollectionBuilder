@@ -5,7 +5,7 @@ namespace pt.ncaro.util.dependencyinjection.mock
     [ServiceImplementation(typeof(IHiFiveService))]
     [ServiceImplementation(typeof(ISayHelloService))]
     [ServiceImplementation(typeof(IPingService), component:"ping")]
-    [ServiceImplementation(typeof(IPingService), component:"pong")]
+    [ServiceImplementation(typeof(IPongService), component:"pong")]
     public class ServiceImpl : IHiFiveService, ISayHelloService, IPingService, IPongService
     {
         public int HiFive()
