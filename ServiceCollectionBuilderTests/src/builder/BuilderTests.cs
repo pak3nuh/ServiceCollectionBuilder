@@ -44,5 +44,12 @@ namespace pt.ncaro.util.dependencyinjection.builder
             Assert.NotSame(spi.GetService<IPingService>(),spi.GetService<IPingService>());
         }
         
+        [Fact]
+        public void BuildComponent() {
+            var comp = ServiceCollectionBuilder.create().AddCurrentAssembly("ping").Build().BuildServiceProvider();
+            Assert.NotNull(comp.GetService<IPingService>());
+            Assert.Null(comp.GetService<IPongService>());
+        }
+
     }
 }
