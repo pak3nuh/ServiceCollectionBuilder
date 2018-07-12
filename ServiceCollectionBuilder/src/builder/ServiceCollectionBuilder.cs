@@ -40,10 +40,10 @@ namespace pt.ncaro.util.dependencyinjection.builder
             return ScanAssembly(() => _scanner.scan(curr));
         }
 
-        public ServiceCollectionBuilder AddCurrentAssembly(string component)
+        public ServiceCollectionBuilder AddCurrentAssembly(string component, bool includeRootComponent = false)
         {
             var curr = Assembly.GetCallingAssembly();
-            return ScanAssembly(() => _scanner.scan(curr, component));
+            return ScanAssembly(() => _scanner.scan(curr, component, includeRootComponent));
         }
 
         public ServiceCollectionBuilder AddAssembly(Assembly assembly)
