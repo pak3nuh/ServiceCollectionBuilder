@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using pt.ncaro.util.dependencyinjection.attributes;
@@ -14,7 +13,7 @@ namespace pt.ncaro.util.dependencyinjection.builder
 
         private readonly ICollection<DiscoveredService> _services = new List<DiscoveredService>();
 
-        internal ServiceCollectionBuilder(IAttributeScanner scanner)
+        private ServiceCollectionBuilder(IAttributeScanner scanner)
         {
             _scanner = scanner;
         }
@@ -52,9 +51,9 @@ namespace pt.ncaro.util.dependencyinjection.builder
             return ScanAssembly(() => _scanner.scan(assembly));
         }
 
-        public ServiceCollectionBuilder AddAssembly(Assembly assembly, string component)
+        public ServiceCollectionBuilder AddAssembly(Assembly assembly, string component, bool includeRootComponent = false)
         {
-            return ScanAssembly(() => _scanner.scan(assembly, component));
+            return ScanAssembly(() => _scanner.scan(assembly, component, includeRootComponent));
         }
 
         private ServiceCollectionBuilder ScanAssembly(ScanFunc func)
@@ -67,7 +66,7 @@ namespace pt.ncaro.util.dependencyinjection.builder
             return this;
         }
 
-        public static ServiceCollectionBuilder create() {
+        public static ServiceCollectionBuilder Create() {
             return new ServiceCollectionBuilder(new AttributeScanner());
         }
 
