@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using pt.ncaro.util.dependencyinjection.attributes;
@@ -8,18 +7,15 @@ namespace pt.ncaro.util.dependencyinjection.builder
 {
     public class ServiceCollectionBuilder
     {
-        private delegate IList<DiscoveredService> ScanFunc(Assembly assembly);
+        private delegate IList<DiscoveredService> ScanFunc();
 
         private readonly IAttributeScanner _scanner;
 
         private readonly ICollection<DiscoveredService> _services = new List<DiscoveredService>();
 
-        private ScanFunc _scanFunc;
-
-        internal ServiceCollectionBuilder(IAttributeScanner scanner)
+        private ServiceCollectionBuilder(IAttributeScanner scanner)
         {
             _scanner = scanner;
-            _scanFunc = _scanner.scan;
         }
 
         public IServiceCollection Build()
@@ -40,23 +36,29 @@ namespace pt.ncaro.util.dependencyinjection.builder
 
         public ServiceCollectionBuilder AddCurrentAssembly()
         {
-            return ScanAssembly(Assembly.GetCallingAssembly());
+            var curr = Assembly.GetCallingAssembly();
+            return ScanAssembly(() => _scanner.scan(curr));
+        }
+
+        public ServiceCollectionBuilder AddCurrentAssembly(string component, bool includeRootComponent = false)
+        {
+            var curr = Assembly.GetCallingAssembly();
+            return ScanAssembly(() => _scanner.scan(curr, component, includeRootComponent));
         }
 
         public ServiceCollectionBuilder AddAssembly(Assembly assembly)
         {
-            return ScanAssembly(assembly);
+            return ScanAssembly(() => _scanner.scan(assembly));
         }
 
-        public ServiceCollectionBuilder Component(string component)
+        public ServiceCollectionBuilder AddAssembly(Assembly assembly, string component, bool includeRootComponent = false)
         {
-            _scanFunc = assembly => _scanner.scan(assembly, component);
-            return this;
+            return ScanAssembly(() => _scanner.scan(assembly, component, includeRootComponent));
         }
 
-        private ServiceCollectionBuilder ScanAssembly(Assembly assembly)
+        private ServiceCollectionBuilder ScanAssembly(ScanFunc func)
         {
-            foreach (var discoveredService in _scanFunc(assembly))
+            foreach (var discoveredService in func())
             {
                 _services.Add(discoveredService);
             }
@@ -64,11 +66,15 @@ namespace pt.ncaro.util.dependencyinjection.builder
             return this;
         }
 
+        public static ServiceCollectionBuilder Create() {
+            return new ServiceCollectionBuilder(new AttributeScanner());
+        }
+
         public static IServiceCollection FromCurrentAssembly()
         {
             var assembly = Assembly.GetCallingAssembly();
             return new ServiceCollectionBuilder(new AttributeScanner())
-                .ScanAssembly(assembly)
+                .AddAssembly(assembly)
                 .Build();
         }
     }

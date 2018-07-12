@@ -7,10 +7,10 @@ namespace pt.ncaro.util.dependencyinjection.builder
     public class BuilderTests
     {
 
-        private ServiceProvider spi = ServiceCollectionBuilder.FromCurrentAssembly().BuildServiceProvider();
+        private readonly ServiceProvider spi = ServiceCollectionBuilder.FromCurrentAssembly().BuildServiceProvider();
         
         [Fact]
-        public void createServiceCollection()
+        public void CreateServiceCollection()
         {
             var myService = spi.GetService<IHiFiveService>();
             Assert.NotNull(myService);
@@ -18,7 +18,7 @@ namespace pt.ncaro.util.dependencyinjection.builder
         }
 
         [Fact]
-        public void multipleServiceImplementation()
+        public void MultipleServiceImplementation()
         {
             var hiFiveService = spi.GetService<IHiFiveService>();
             Assert.NotNull(hiFiveService);
@@ -30,16 +30,26 @@ namespace pt.ncaro.util.dependencyinjection.builder
         }
 
         [Fact]
-        public void scopedDependencies()
+        public void ScopedDependencies()
         {
-            Assert.True(false);
+            Assert.Same(spi.GetService<IPongService>(),spi.GetService<IPongService>());
+            var scope1 = spi.CreateScope();
+            Assert.NotSame(scope1.ServiceProvider.GetService<IPongService>(),spi.GetService<IPongService>());
+            Assert.Same(scope1.ServiceProvider.GetService<IPongService>(),scope1.ServiceProvider.GetService<IPongService>());
         }
 
         [Fact]
-        public void transientDependencies()
+        public void TransientDependencies()
         {
-            Assert.True(false);
+            Assert.NotSame(spi.GetService<IPingService>(),spi.GetService<IPingService>());
         }
         
+        [Fact]
+        public void BuildComponent() {
+            var comp = ServiceCollectionBuilder.Create().AddCurrentAssembly("ping").Build().BuildServiceProvider();
+            Assert.NotNull(comp.GetService<IPingService>());
+            Assert.Null(comp.GetService<IPongService>());
+        }
+
     }
 }
