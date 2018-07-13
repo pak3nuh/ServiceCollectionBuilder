@@ -11,12 +11,16 @@ namespace pt.ncaro.util.dependencyinjection.attributes
 
         private readonly IAttributeScanner _scanner = new AttributeScanner();
         
+        /// <summary>
+        /// Tests for all attributes in the current assembly. Every time a new attribute is used, this should
+        /// be updated. Not the best tactic but not other way arround.
+        /// </summary>
         [Fact]
         public void ScanCurrentAssemblyAllServices()
         {
             var attributes = _scanner.scan(Assembly.GetExecutingAssembly());
             
-            Assert.Equal(4, attributes.Count);
+            Assert.Equal(8, attributes.Count);
             AssertImpl(attributes, typeof(ServiceImpl), typeof(IHiFiveService));
             AssertImpl(attributes, typeof(ServiceImpl), typeof(ISayHelloService));
             AssertImpl(attributes, typeof(ServiceImpl), typeof(IPingService));

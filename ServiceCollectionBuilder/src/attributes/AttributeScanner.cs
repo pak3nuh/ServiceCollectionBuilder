@@ -29,8 +29,8 @@ namespace pt.ncaro.util.dependencyinjection.attributes
         private IEnumerable<DiscoveredService> all(Assembly assembly)
         {
             return
-                (from t in assembly.DefinedTypes
-                    select new {type = t, attrs = t.GetCustomAttributes<ServiceImplementationAttribute>()})
+                (from asType in assembly.DefinedTypes
+                    select new {type = asType, attrs = asType.GetCustomAttributes<ServiceImplementationAttribute>()})
                 .Where(it => it.attrs.Any())
                 .SelectMany(it =>
                     from attr in it.attrs
