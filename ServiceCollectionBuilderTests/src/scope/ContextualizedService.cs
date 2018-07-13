@@ -128,7 +128,7 @@ namespace pt.ncaro.util.dependencyinjection.scope
             Assert.Equal(50, value2);
         }
 
-        [ServiceImplementation(typeof(ScopedService), component:"scoped")]
+        [ServiceImplementation(typeof(ScopedService), scope:Scope.Scoped, component:"scoped")]
         class ScopedService
         {
             private readonly Context _context;
@@ -167,12 +167,12 @@ namespace pt.ncaro.util.dependencyinjection.scope
             Assert.Equal(123, value1);
             
             var spi2 = sb.CreateScope(new Context(999));
-            var value2 = spi1.GetRequiredService<ScopedService>().GetContextValue();
+            var value2 = spi2.GetRequiredService<ScopedService>().GetContextValue();
             Assert.Equal(999, value2);
             
-            var value = spi1.GetRequiredService<ScopedService>().GetContextValue();
+            value1 = spi1.GetRequiredService<ScopedService>().GetContextValue();
             Assert.Equal(123, value1);
-            value2 = spi1.GetRequiredService<ScopedService>().GetContextValue();
+            value2 = spi2.GetRequiredService<ScopedService>().GetContextValue();
             Assert.Equal(999, value2);
         }
         
