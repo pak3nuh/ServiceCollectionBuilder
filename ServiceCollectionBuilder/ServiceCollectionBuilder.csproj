@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>ServiceCollectionBuilder</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
     <Authors>Pak3nuh</Authors>
   </PropertyGroup>
   <ItemGroup>
