@@ -4,7 +4,7 @@
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>ServiceCollectionBuilder</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,5 +12,6 @@
     <releaseNotes>First beta release</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>$tags$</tags>
+    <summary>Utility to create dependency graphs using Attributes.</summary>
   </metadata>
 </package>
