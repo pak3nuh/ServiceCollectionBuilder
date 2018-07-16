@@ -10,6 +10,7 @@
     <Description>Utility to create dependency graphs using Attributes. Designed to work with 
       Microsoft.Extensions.DependencyInjection types.</Description>
     <RepositoryUrl>https://github.com/pak3nuh/ServiceCollectionBuilder</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/pak3nuh/ServiceCollectionBuilder/LICENSE</PackageLicenseUrl>
     <PackageTags>dependency-injection dip edp dotnet-standard</PackageTags>
   </PropertyGroup>
   <ItemGroup>
