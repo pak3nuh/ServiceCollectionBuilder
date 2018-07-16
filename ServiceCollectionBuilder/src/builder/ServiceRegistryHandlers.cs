@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using pt.ncaro.util.dependencyinjection.attributes;
+using NCaro.ServiceCollectionBuilder.Attributes;
 
-namespace pt.ncaro.util.dependencyinjection.builder
+namespace NCaro.ServiceCollectionBuilder.Builder
 {
 
     internal delegate void ServiceRegistryHandler(IServiceCollection serviceCollection, DiscoveredService discoveredService);

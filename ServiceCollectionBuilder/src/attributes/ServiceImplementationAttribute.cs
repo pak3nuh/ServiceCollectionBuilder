@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace pt.ncaro.util.dependencyinjection.attributes
+namespace NCaro.ServiceCollectionBuilder.Attributes
 {
     
     /// <summary>

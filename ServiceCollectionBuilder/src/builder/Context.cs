@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using pt.ncaro.util.dependencyinjection.util;
+using NCaro.ServiceCollectionBuilder.Util;
 
-namespace pt.ncaro.util.dependencyinjection.builder
+namespace NCaro.ServiceCollectionBuilder.Builder
 {
     
     /// <summary>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using pt.ncaro.util.dependencyinjection.attributes;
+using NCaro.ServiceCollectionBuilder.Attributes;
 
-namespace pt.ncaro.util.dependencyinjection.builder
+namespace NCaro.ServiceCollectionBuilder.Builder
 {
     /// <summary>
     /// Entry point to create IServiceCollection instances from elements annotated with ServiceImplementationAttribute

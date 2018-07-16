@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using pt.ncaro.util.dependencyinjection.mock;
+using NCaro.ServiceCollectionBuilder.Attributes;
+using NCaro.ServiceCollectionBuilder.Mock;
 using Xunit;
 
-namespace pt.ncaro.util.dependencyinjection.attributes
+namespace NCaro.ServiceCollectionBuilder.Attributes
 {
     public class ScannerTests
     {

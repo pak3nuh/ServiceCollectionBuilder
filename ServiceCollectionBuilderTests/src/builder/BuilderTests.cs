@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using pt.ncaro.util.dependencyinjection.mock;
+using NCaro.ServiceCollectionBuilder.Mock;
 using Xunit;
 
-namespace pt.ncaro.util.dependencyinjection.builder
+namespace NCaro.ServiceCollectionBuilder.Builder
 {
     public class BuilderTests
     {
