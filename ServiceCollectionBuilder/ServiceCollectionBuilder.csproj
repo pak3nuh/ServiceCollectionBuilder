@@ -3,16 +3,26 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>NCaro.ServiceCollectionBuilder</RootNamespace>
   </PropertyGroup>
+
   <PropertyGroup>
     <PackageId>ServiceCollectionBuilder</PackageId>
-    <Version>0.1.0-beta</Version>
+    <Version>0.1.1-beta</Version>
     <Authors>NCaro</Authors>
-    <Description>Utility to create dependency graphs using Attributes. Designed to work with 
-      Microsoft.Extensions.DependencyInjection types.</Description>
-    <RepositoryUrl>https://github.com/pak3nuh/ServiceCollectionBuilder</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/pak3nuh/ServiceCollectionBuilder/LICENSE</PackageLicenseUrl>
-    <PackageTags>dependency-injection dip edp dotnet-standard</PackageTags>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>
+      Utility to create dependency graphs using Attributes. 
+      Designed to work with Microsoft.Extensions.DependencyInjection types.
+      It also provides additional functionality like context bound scoped services.
+    </Description>
+    <RepositoryUrl>https://github.com/pak3nuh/ServiceCollectionBuilder.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://github.com/pak3nuh/ServiceCollectionBuilder/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>dependency-injection dip edp dotnet-standard</PackageTags>
+    <PackageProjectUrl>https://github.com/pak3nuh/ServiceCollectionBuilder.git</PackageProjectUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
   </ItemGroup>
