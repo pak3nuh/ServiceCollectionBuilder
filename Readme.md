@@ -4,6 +4,8 @@ Utility that helps to build the dependency graph used by interconnected services
 
 It integrates with ``Microsoft.Extensions.DependencyInjection`` by providing a ``IServiceCollection`` object pre configured with the dependant services.
 
+Available on [nuget](https://www.nuget.org/packages/ServiceCollectionBuilder)
+
 ### Usage
 
 Lest assume that our main component is the ``IHiFiveService`` interface.
