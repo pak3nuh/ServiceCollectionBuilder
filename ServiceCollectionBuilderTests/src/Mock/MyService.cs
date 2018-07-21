@@ -1,13 +1,13 @@
 ﻿
 
-using NCaro.ServiceCollectionBuilder.Attributes;
+using NCaro.DependencyInjection.Attributes;
 
-namespace NCaro.ServiceCollectionBuilder.Mock
+namespace NCaro.DependencyInjection.Mock
 {
     [ServiceImplementation(typeof(IHiFiveService))]
     [ServiceImplementation(typeof(ISayHelloService))]
-    [ServiceImplementation(typeof(IPingService), Attributes.Scope.Transient, "ping")]
-    [ServiceImplementation(typeof(IPongService), Attributes.Scope.Scoped, "pong")]
+    [ServiceImplementation(typeof(IPingService), DependencyInjection.Attributes.Scope.Transient, "ping")]
+    [ServiceImplementation(typeof(IPongService), DependencyInjection.Attributes.Scope.Scoped, "pong")]
     public class ServiceImpl : IHiFiveService, ISayHelloService, IPingService, IPongService
     {
         public int HiFive()

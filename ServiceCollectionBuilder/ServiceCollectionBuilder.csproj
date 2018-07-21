@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>NCaro.ServiceCollectionBuilder</RootNamespace>
+    <RootNamespace>NCaro.DependencyInjection</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup>
     <PackageId>ServiceCollectionBuilder</PackageId>
-    <Version>0.1.1-beta</Version>
+    <Version>0.1.2-beta</Version>
     <Authors>NCaro</Authors>
   </PropertyGroup>
-
   <PropertyGroup>
     <Description>
       Utility to create dependency graphs using Attributes. 
@@ -22,7 +20,6 @@
     <PackageTags>dependency-injection dip edp dotnet-standard</PackageTags>
     <PackageProjectUrl>https://github.com/pak3nuh/ServiceCollectionBuilder.git</PackageProjectUrl>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
   </ItemGroup>

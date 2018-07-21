@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using NCaro.ServiceCollectionBuilder.Util;
+using NCaro.DependencyInjection.Util;
 
-namespace NCaro.ServiceCollectionBuilder.Builder
+namespace NCaro.DependencyInjection.Builder
 {
     
     /// <summary>
@@ -28,6 +25,7 @@ namespace NCaro.ServiceCollectionBuilder.Builder
 
         public IServiceProvider CreateScope(TCtx context)
         {
+            Check.Argument(context != null, "Context must be not null");
             var newSpi = _spi.CreateScope().ServiceProvider;
             //Explicit cast to access the set accessor
             var contextService = (ScopeContext<TCtx>)newSpi.GetRequiredService<IScopeCtx<TCtx>>();

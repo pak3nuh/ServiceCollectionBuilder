@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using NCaro.ServiceCollectionBuilder.Attributes;
-using NCaro.ServiceCollectionBuilder.Builder;
-using NCaro.ServiceCollectionBuilder.Util;
+using NCaro.DependencyInjection.Attributes;
+using NCaro.DependencyInjection.Builder;
 using Xunit;
 
-namespace NCaro.ServiceCollectionBuilder.Scope
+namespace NCaro.DependencyInjection.Scope
 {
 
     interface IS1
@@ -118,7 +114,7 @@ namespace NCaro.ServiceCollectionBuilder.Scope
 //            Assert.Equal(50, value2);
 //        }
 
-        [ServiceImplementation(typeof(ScopedService), scope:Attributes.Scope.Scoped, component:"scoped")]
+        [ServiceImplementation(typeof(ScopedService), scope:DependencyInjection.Attributes.Scope.Scoped, component:"scoped")]
         class ScopedService
         {
             private readonly Context _context;
@@ -147,7 +143,7 @@ namespace NCaro.ServiceCollectionBuilder.Scope
         [Fact]
         public void TestScopeBuilder()
         {
-            var sb = Builder.ServiceCollectionBuilder.Create()
+            var sb = SCBuilder.Create()
                 .AddAssembly(Assembly.GetExecutingAssembly(), "scoped")
                 .Context<Context>();
 

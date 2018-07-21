@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NCaro.ServiceCollectionBuilder.Mock;
+using NCaro.DependencyInjection.Mock;
 using Xunit;
 
-namespace NCaro.ServiceCollectionBuilder.Builder
+namespace NCaro.DependencyInjection.Builder
 {
     public class BuilderTests
     {
 
-        private readonly ServiceProvider spi = ServiceCollectionBuilder.FromCurrentAssembly().BuildServiceProvider();
+        private readonly ServiceProvider spi = SCBuilder.FromCurrentAssembly().BuildServiceProvider();
         
         [Fact]
         public void CreateServiceCollection()
@@ -46,7 +46,7 @@ namespace NCaro.ServiceCollectionBuilder.Builder
         
         [Fact]
         public void BuildComponent() {
-            var comp = ServiceCollectionBuilder.Create().AddCurrentAssembly("ping").Build().BuildServiceProvider();
+            var comp = SCBuilder.Create().AddCurrentAssembly("ping").Build().BuildServiceProvider();
             Assert.NotNull(comp.GetService<IPingService>());
             Assert.Null(comp.GetService<IPongService>());
         }

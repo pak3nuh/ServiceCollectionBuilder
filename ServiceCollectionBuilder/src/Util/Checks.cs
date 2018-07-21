@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NCaro.ServiceCollectionBuilder.Util
+namespace NCaro.DependencyInjection.Util
 {
     public static class Check
     {

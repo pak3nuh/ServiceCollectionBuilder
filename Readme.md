@@ -49,7 +49,7 @@ public class ConsoleLogger : ILogger {
 ```
 and get a fully constructed ``IHiFiveService``
 ```csharp
-IHiFiveService service = ServiceCollectionBuilder
+IHiFiveService service = SCBuilder
     .FromCurrentAssembly()
     .BuildServiceProvider()
     .GetService<IHiFiveService>();
@@ -87,7 +87,7 @@ public class ScopedService
 
 public void TestScopeBuilder()
 {
-    ContextSpiBuilder<Context> sb = ServiceCollectionBuilder.Create()
+    ContextSpiBuilder<Context> sb = SCBuilder.Create()
         .AddAssembly(Assembly.GetExecutingAssembly(), "scoped")
         .Context<Context>();
 
@@ -101,5 +101,7 @@ public void TestScopeBuilder()
 
 ### Changelog
 
-v0.1.0-beta
-Initial beta release
+- v0.1.2-beta Applied namespace conventions.
+Added more documentation.
+
+- v0.1.0-beta Initial beta release
